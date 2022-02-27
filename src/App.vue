@@ -20,7 +20,14 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+/*import sassStyles from './scss/index.module.scss'*/
+
 </style>
-<!--<style lang="scss">-->
-<!--$color: red;-->
+
+<!--<style lang="scss" rel="stylesheet/scss">-->
+<!--<style lang="scss" rel="stylesheet/scss">-->
+<!--#app{-->
+<!--  background: red;-->
+<!--}-->
 <!--</style>-->
