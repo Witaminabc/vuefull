@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Carusel from '@/components/Carusel'
 import Menu from '@/components/Menu'
+import Buyitem from '@/components/cart/Buyitem'
+
 
 Vue.use(Router)
 
@@ -22,6 +24,11 @@ export default new Router({
       path: '/menu',
       name: 'Menu',
       component: Menu
+    },
+    {
+      path: '/buyitem',
+      name: 'Buyitem',
+      component: Buyitem
     }
   ]
 })
