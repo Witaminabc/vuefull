@@ -15,9 +15,9 @@ export default new Vuex.Store({
       buyitem: (state, getters) => {
         return state.buyitem;
       },
-        tablet() {
-            return state.windowWidth < 1300;
-        },
+        // tablet() {
+        //     return state.windowWidth < 1300;
+        // },
         mobile() {
             return state.windowWidth < 767;
         },
