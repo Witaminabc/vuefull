@@ -8,4 +8,8 @@ export default {
     [SET_EXPAND](state, expand) {
         state.expand = expand;
     },
+  increment(state,n) {
+    // изменяем состояние
+    state.buyitem.push(n);
+  }
 }

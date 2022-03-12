@@ -11,7 +11,7 @@
         <div id="total">Total</div>
       </div>
       <router-link :to="{ name: 'Buyitem', params: { Id: 123 }}">cart</router-link>
-      <buyitem v-for="buyitem in buyitems" v-bind:buy_data="buyitem"></buyitem>
+<!--      <buyitem v-for="buyitem in buyitems" v-bind:buy_data="buyitem"></buyitem>-->
       <h5 v-if="total()">Sum: $ {{total()}}</h5>
     </div>
   </div>
@@ -48,19 +48,19 @@ import buyitem from "./Buyitem.vue"
           img: "https://chenyiya.com/codepen/product-1.jpg",
           title: "Beer Bottle",
           price: "25",
-          id: "beer"
+          id: 1
         },
         {
           img: "https://chenyiya.com/codepen/product-2.jpg",
           title: "Eco Bag",
           price: "73",
-          id: "eco-bag"
+          id: 2
         },
         {
           img: "https://chenyiya.com/codepen/product-3.jpg",
           title: "Paper Bag",
           price: "35",
-          id: "paper-bag"
+          id: 3
         }
       ],
       buyitems: []

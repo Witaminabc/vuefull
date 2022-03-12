@@ -29,7 +29,9 @@
       </a></li>
       <li><a href="">ТОЛЬКО ОРИГИНАЛЫ</a></li>
       <li><a href="">Оплата</a></li>
-      <li><a href="">О компании</a></li>
+      <i class="fa fa-plus" v-on:click="addNew()">плюс</i>
+
+      <li><a href="">О компании{{buyitem}}</a></li>
       <li class="point"><span>...</span>
         <ul class="submenu">
           <li><a href="">Полезный блог</a></li>
@@ -74,8 +76,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['user', 'userAuthorized', 'url', 'tablet', 'mobile'])
+    ...mapGetters(['user', 'userAuthorized', 'url', 'tablet', 'mobile','buyitem'])
 
+  },
+  methods: {
+    addNew() {
+      this.$store.commit('increment', { text: 'новая заметка' })
+    }
   }
 }
 </script>

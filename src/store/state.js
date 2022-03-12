@@ -6,5 +6,5 @@ export default {
     windowWidth:  window.innerWidth,
     expand: false,
     count:50,
-    buyitems:[]
+    buyitem:[]
 }

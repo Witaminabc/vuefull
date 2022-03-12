@@ -9,59 +9,48 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
 
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App'    }
+  },
+  computed: {
+    ...mapGetters(['user', 'userAuthorized', 'url', 'tablet', 'mobile','buyitem','notes'])
 
-    }
+
   },
   props: ["item_data", "buyitems"],
   methods: {
-    addItem: function(item_data) {
-      if (item_data.id == "beer") {
-        this.$parent.beerClick += 1;
-        if (this.$parent.beerClick <= 1) {
-          this.pushData();
-        } else {
-          var i = this.findIndex(this.$parent.buyitems, "id", "beer");
-          this.$parent.buyitems[i].qty += 1;
-          this.$parent.buyitems[i].total = this.$parent.buyitems[i].qty*this.$parent.buyitems[i].price;
-          console.log(i);
-        }
-      } else if (item_data.id == "eco-bag") {
-        this.$parent.ecoClick += 1;
-        if (this.$parent.ecoClick <= 1) {
-          this.pushData();
-        } else {
-          var i = this.findIndex(this.$parent.buyitems, "id", "eco-bag");
-          this.$parent.buyitems[i].qty += 1;
-          this.$parent.buyitems[i].total =this.$parent.buyitems[i].qty*this.$parent.buyitems[i].price;
-        }
+    addItem: function(buy_data) {
+      if (this.findIndex(this.$store.getters.buyitem,'id',buy_data.id)<0) {
+        console.log(this.findIndex(this.$store.getters.buyitem,'id',buy_data.id))
+        // this.$store.getters.buyitem.qty=1;
+        // this.$store.getters.buyitem.qty+=1;
+        // this.$store.getters.buyitem.indexOf(buy_data);
+        // this.findIndex(this.$store.getters.buyitem,'id',buy_data.id)
+        this.addNew(buy_data);
+        // if (this.$store.getters.buyitem.qty <= 1) {
+        //   this.addNew();
       } else {
-        this.$parent.paperClick += 1;
-        if (this.$parent.paperClick <= 1) {
-          this.pushData();
-        } else {
-          var i = this.findIndex(this.$parent.buyitems, "id", "paper-bag");
-          this.$parent.buyitems[i].qty += 1;
-          this.$parent.buyitems[i].total = this.$parent.buyitems[i].qty*this.$parent.buyitems[i].price;
-        }
+        var i = this.findIndex(this.$store.getters.buyitem,'id',buy_data.id);
+        this.$store.getters.buyitem[i].qty += 1;
+        this.$store.getters.buyitem[i].total = this.$store.getters.buyitem[i].qty * this.$store.getters.buyitem[i].price;
+        console.log(i);
       }
-      console.log(this.$parent.beerClick, this.$parent.ecoClick, this.$parent.paperClick);
     },
-    pushData: function() {
-      this.$parent.buyitems.push({
-        img: this.item_data.img,
-        title: this.item_data.title,
-        price: this.item_data.price,
-        qty: 1,
-        total: this.item_data.price,
-        id: this.item_data.id
-      });
-    },
+      addNew:function() {
+        this.$store.commit('increment', {
+          img: this.item_data.img,
+          title: this.item_data.title,
+          price: this.item_data.price,
+          qty: 1,
+          total: this.item_data.price,
+          id: this.item_data.id
+        })
+      },
     findIndex: function(array, attr, value) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i][attr] === value) {
