@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="col-4">
     <img :src="item_data.img"/>
     <i class="fa fa-plus" v-on:click="addItem(item_data)">плюс</i>
     <h2>{{item_data.title}}</h2>
@@ -58,7 +58,7 @@ export default {
         }
       }
       return -1;
-    },
+    }
   }
 }
 </script>

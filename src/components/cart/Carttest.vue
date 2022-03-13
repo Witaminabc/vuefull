@@ -1,19 +1,14 @@
 <template>
   <div id="">
     <div id="product">
-      <item v-for="item in items" v-bind:item_data="item"></item>
-    </div>
-    <div id="cart">
-      <div id="head">
-        <h3>Shopping Cart</h3>
-        <div id="price">Price</div>
-        <div id="quantity">Quantity</div>
-        <div id="total">Total</div>
+      <div class="container">
+        <div class="row">
+          <item v-for="item in items" v-bind:item_data="item"></item>
+
+        </div>
       </div>
-      <router-link :to="{ name: 'Buyitem', params: { Id: 123 }}">cart</router-link>
-<!--      <buyitem v-for="buyitem in buyitems" v-bind:buy_data="buyitem"></buyitem>-->
-      <h5 v-if="total()">Sum: $ {{total()}}</h5>
     </div>
+
   </div>
 
 </template>
@@ -39,9 +34,7 @@ import buyitem from "./Buyitem.vue"
     },
   data () {
     return {
-      beerClick :0,
-      ecoClick :0,
-      paperClick :0,
+
 
       items: [
         {
@@ -67,13 +60,13 @@ import buyitem from "./Buyitem.vue"
     }
   },
   methods: {
-    total: function(){
-      var sum = 0;
-      this.buyitems.forEach(function(buyitem){
-        sum += parseInt(buyitem.total);
-      });
-      return sum;
-    }
+    // total: function(){
+    //   var sum = 0;
+    //   this.$store.getters.buyitem.forEach(function(buyitem){
+    //     sum += parseInt(buyitem.total);
+    //   });
+    //   return sum;
+    // }
   }
 }
 </script>

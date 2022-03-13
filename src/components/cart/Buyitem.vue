@@ -1,20 +1,26 @@
 <template>
-  <div  class="row">
-      <div v-for="buyitemss in buyitem">
-<!--        <div>{{buyitemss.img}}</div>-->
-        <div>{{ buyitemss.id }}</div>
-<!--    <div class="cart">123</div>-->
-<!--    <div class="cartno">-->
-    <img :src="buyitemss.img"/>
-    <h4>{{buyitemss.title}}</h4>
-    <p>$ {{buyitemss.price}}</p>
-    <div class="qty-minus" v-on:click="minusQty(buyitemss)">-</div>
-    <div class="qty">{{buyitemss.qty}}</div>
-    <div class="qty-plus" v-on:click="plusQty(buyitemss)">+</div>
-    <div class="del" v-on:click="removeItem(buyitemss)">Remove</div>
-    <div class="totalprice">{{buyitemss.total}}</div>
-<!--    {{buyitem}}-->
+  <div class="row">
+    <div id="head">
+      <h3>Shopping Cart</h3>
+      <div id="price">Price</div>
+      <div id="quantity">Quantity</div>
+      <div id="total">Total</div>
     </div>
+    <div v-for="buyitemss in buyitem">
+      <div>{{ buyitemss.id }}</div>
+      <img :src="buyitemss.img"/>
+      <h4>{{ buyitemss.title }}</h4>
+      <p>$ {{ buyitemss.price }}</p>
+      <div class="qty-minus" v-on:click="minusQty(buyitemss)">-</div>
+      <div class="qty">{{ buyitemss.qty }}</div>
+      <div class="qty-plus" v-on:click="plusQty(buyitemss)">+</div>
+      <div class="del" v-on:click="removeItem(buyitemss)">Remove</div>
+      <div class="totalprice">{{ buyitemss.total }}</div>
+
+      <!--    {{buyitem}}-->
+    </div>
+    <h5 v-if="total()">Sum: $ {{ total() }}</h5>
+
   </div>
 
 </template>
@@ -70,7 +76,14 @@ export default {
         this.removeItem(buy_data);
       }
       buy_data.total = buy_data.qty*buy_data.price;
-    }
+    },
+  total: function(){
+    var sum = 0;
+    this.$store.getters.buyitem.forEach(function(buyitem){
+      sum += parseInt(buyitem.total);
+    });
+    return sum;
+  }
 
   }
 }
@@ -80,9 +93,51 @@ export default {
 <style scoped>
 .cartno{
 }
-.cart:hover .cartno{
-  display: none;
-  background: red;
 
+img {
+  height: 100px;
+  float: left;
+}
+.qty-minus {
+  float: left;
+  width: 20px;
+  line-height: 100px;
+  margin-left: 60px;
+  text-align: center;
+  cursor: pointer;
+}
+.qty {
+  float: left;
+  width: 20px;
+  line-height: 100px;
+  margin-left: 20px;
+  text-align: center;
+}
+.qty-plus {
+  float: left;
+  width: 20px;
+  line-height: 100px;
+  margin-left: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+.del {
+  float: left;
+  width: 80px;
+  line-height: 100px;
+  margin-left: 60px;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #ED277F;
+}
+.totalprice {
+  float: left;
+  width: 80px;
+  line-height: 100px;
+  margin-left: 10px;
+  text-align: right;
+}
+.row p::before, .box p::before, .totalprice::before {
+  content: "$";
 }
 </style>
